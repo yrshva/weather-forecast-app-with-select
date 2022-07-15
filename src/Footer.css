@@ -1,0 +1,24 @@
+.footer-github-link {
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  text-decoration: none;
+  color: #5a6275;
+}
+.footer-github-link:hover {
+  color: #b4b6b8;
+}
+.footer-github-link {
+  background-color: #d9edfe;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  text-align: center;
+}
+.footer-github-link a:hover {
+  color: #b4b6b8;
+}
+.footer-github-link a {
+  text-decoration: none;
+  color: #5a6275;
+}

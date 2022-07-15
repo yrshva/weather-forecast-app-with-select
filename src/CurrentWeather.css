@@ -1,0 +1,78 @@
+.weatherTodayWrap {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+.weatherTodayContainer {
+  width: 60%;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  max-width: 400px;
+}
+.weatherPositioning {
+  display: block;
+  margin: auto;
+  width: 85%;
+}
+.weatherTodayContainer h2{
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.weatherTodayContainer p {
+  margin-top: 5px;
+  color: #5a6275;
+  font-size: 14px;
+  line-height: 16px;
+}
+.leftBox {
+  float: left;
+}
+.rightBox {
+  margin-right: 0;
+}
+.rightBox {
+  text-align: right;
+}
+.centralBox {
+  margin: auto;
+  display: block;
+  width: 80px;
+}
+.centralBox div{
+  position: absolute;
+  z-index: -1;
+  margin-top: 24px;
+}
+
+
+
+@media (max-width: 350px) {
+  .weatherTodayContainer {
+    width: 90%;
+  }
+}
+@media (max-width: 450px) {
+  .weatherTodayContainer {
+    width: 90%;
+  }
+}
+  @media (max-width: 600px) {
+   .weatherTodayContainer h2{
+      font-size: 18px;
+    }
+    .weatherTodayContainer p{
+      font-size: 12px;
+    }
+    .weatherTodayContainer {
+      width: 70%;
+    }
+    .weatherPositioning {
+      width: 100%;
+    }
+    .centralBox div{
+      margin-top: 18px;
+    }
+}
+
