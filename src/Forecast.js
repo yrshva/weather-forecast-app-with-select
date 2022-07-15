@@ -1,4 +1,4 @@
-import React, {useState, useEffect, CSSProperties} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import ForecastDay from "./ForecastDay"
 
@@ -9,16 +9,13 @@ export default function Forecast(props) {
   function showForecast(response){
     setForecastData(response.data.daily);
   }
-  function getForecast(){
+  useEffect(()=>{
     let apiKey = "c558530bb05c403b5dd2f204254ec041"
     let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.city[0]}&lon=${props.city[1]}&exclude=current,hourly,minutely,alerts&appid=${apiKey}&units=metric`
     axios.get(apiUrl).then(showForecast);
     axios.get(apiUrl).catch((data, status) => {
       console.log("Something went wrong");
     });
-  }
-  useEffect(()=>{
-    getForecast();
   },[props.city])
   useEffect(()=>{
   setTimeout(()=>{
