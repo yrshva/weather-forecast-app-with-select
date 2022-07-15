@@ -5,8 +5,9 @@ import axios from "axios";
 import cities from "cities.json";
 import CurrentWeather from "./CurrentWeather";
 import Forecast from './Forecast';
-import 'react-datalist-input/dist/styles.css';
 import "./Search.css";
+import './Datalist.css';
+
 
 
 
@@ -96,6 +97,8 @@ export default function Search() {
     </div>
   );
 }else{
-  return null;
+  return <div style={{width:"100%", height:"100vh"}}>
+  <GridLoader color={"#a8d3f7"} loading={true} cssOverride={override} size={30} />
+  </div>
 }
 }

@@ -1,15 +1,9 @@
 import React, {useState, useEffect, CSSProperties} from 'react';
 import axios from 'axios';
-import BeatLoader from "react-spinners/BeatLoader";
 import ForecastDay from "./ForecastDay"
 
 import "./Forecast.css";
 export default function Forecast(props) {
-  const override: CSSProperties = {
-    display: "block",
-    margin: "auto",
-    textAlign: "center"
-  };
   let [forecastData,setForecastData]=useState(null);
   let [loaded, setLoaded]=useState(false);
   function showForecast(response){
@@ -42,10 +36,7 @@ export default function Forecast(props) {
             })}
         </div>
       </div>
-  }else {
-    return <BeatLoader color={"#a8d3f7"} loading={true} cssOverride={override} size={15} />
-  }
-  
+  }else return null;
 }
 
   

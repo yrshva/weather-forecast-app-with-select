@@ -12,23 +12,17 @@ export default function CurrentWeather(props) {
     margin: "auto",
     textAlign: "center"
   };
-    let months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
+    let months = ["Jan","Feb","Mar","Apr", "May","Jun","Jul","Aug", "Sep","Oct","Nov","Dec"];
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let [weatherData, setWeatherData] = useState(null);
     let [loaded, setLoaded]=useState(false);
+    let time = new Date().toLocaleString();
+    let [localTime,setLocalTime] = useState(time);
+    useEffect(() => {
+      setInterval(() => {
+      setLocalTime(time);
+      }, 1000);
+    });
     function showWeatherData(response) {
       setWeatherData(response.data);
     }
@@ -39,6 +33,7 @@ export default function CurrentWeather(props) {
       axios.get(apiUrl).catch((data,status)=>{
         alert("Please enter correct city");
       })
+      console.log('pls');
     }
     function currentTime(){
       let now = new Date();
@@ -107,6 +102,5 @@ export default function CurrentWeather(props) {
           </div>
   }else {
     return  <BeatLoader color={"#a8d3f7"} loading={true} cssOverride={override} size={15} />
-
   }
 }

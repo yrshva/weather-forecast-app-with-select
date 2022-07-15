@@ -10,6 +10,7 @@
   width: 60%;
 }
 .search a {
+  padding-left: 6px;
   color: #5a6275;
   display: inline;
   font-size: 10pt;
