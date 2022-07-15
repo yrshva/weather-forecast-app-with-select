@@ -12,28 +12,26 @@ export default function Forecast(props) {
   };
   let [forecastData,setForecastData]=useState(null);
   let [loaded, setLoaded]=useState(false);
-  useEffect(()=>{
-    setTimeout(()=>{
-      setLoaded(false)
-    },1000)},[props.coordinates])
-  useEffect(()=>{
-    setTimeout(()=>{
-      getForecast();
-
-  },1000)},[forecastData])
   function showForecast(response){
     setForecastData(response.data.daily);
-    setLoaded(true);
   }
   function getForecast(){
     let apiKey = "c558530bb05c403b5dd2f204254ec041"
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.coordinates.lat}&lon=${props.coordinates.lon}&exclude=current,hourly,minutely,alerts&appid=${apiKey}&units=metric`
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.city[0]}&lon=${props.city[1]}&exclude=current,hourly,minutely,alerts&appid=${apiKey}&units=metric`
     axios.get(apiUrl).then(showForecast);
     axios.get(apiUrl).catch((data, status) => {
       console.log("Something went wrong");
     });
   }
-  
+  useEffect(()=>{
+    getForecast();
+  },[props.city])
+  useEffect(()=>{
+  setTimeout(()=>{
+    if(forecastData!=null){
+      setLoaded(true);
+    }
+  },500)},[forecastData])
   if(loaded){
     return <div className="container">
           <div className="row d-flex justify-content-center">

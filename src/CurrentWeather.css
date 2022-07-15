@@ -47,32 +47,31 @@
 }
 
 
-
-@media (max-width: 350px) {
+@media (max-width: 650px) {
+  .weatherTodayContainer h2{
+    font-size: 20px;
+  }
+  .weatherPositioning {
+    width: 100%;
+  }
+  .centralBox div{
+    margin-top: 18px;
+  }
   .weatherTodayContainer {
-    width: 90%;
+    width: 70%;
   }
 }
+
 @media (max-width: 450px) {
   .weatherTodayContainer {
-    width: 90%;
+    width: 85%;
   }
-}
-  @media (max-width: 600px) {
-   .weatherTodayContainer h2{
-      font-size: 18px;
-    }
-    .weatherTodayContainer p{
-      font-size: 12px;
-    }
-    .weatherTodayContainer {
-      width: 70%;
-    }
-    .weatherPositioning {
-      width: 100%;
-    }
-    .centralBox div{
-      margin-top: 18px;
-    }
+  .weatherTodayContainer h2{
+    font-size: 18px;
+  }
+
+  .weatherTodayContainer p{
+    font-size: 12px;
+  }
 }
 

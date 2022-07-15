@@ -18,34 +18,11 @@ export default function Search() {
     top: "50%",
     transform: "translateY(-50%)"
   };
+  let [loaded, setLoaded] = useState(false);
   let [value, setValue] = useState('');
   let [city, setCity] = useState(null);
   let [units, setUnits] = useState("metric");
-  let [loaded, setLoaded] = useState(false);
-  let [weatherData, setWeatherData] = useState(null);
   
-  function showWeatherData(response) {
-    setWeatherData({
-      coordinates: response.data.coord,
-      name: response.data.name,
-      temperature: response.data.main.temp,
-      wind: response.data.wind.speed,
-      temp_min: response.data.main.temp_min,
-      temp_max: response.data.main.temp_max,
-      timezone: response.data.timezone,
-      icon: response.data.weather[0].icon,
-      description: response.data.weather[0].description
-    });
-    setLoaded(true);
-  }
-  function getWeatherData(){
-    const apiKey = "c558530bb05c403b5dd2f204254ec041";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${city[0]}&lon=${city[1]}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(showWeatherData);
-    axios.get(apiUrl).catch((data,status)=>{
-      alert("Please enter correct city");
-    })
-  }
   function showCity(response){
     setCity([response.data.lat, response.data.lon]);
   }
@@ -69,17 +46,7 @@ export default function Search() {
     event.preventDefault();
     setUnits("metric");
   }
-  useEffect(()=>{
-    setTimeout(()=>{
-      if(city!=null){
-        getWeatherData();
-      }else{
-        showCurrentLocation();
-      }
-    },500)   
-  }, [city])
-
-
+  
   const items = useMemo(
     () =>
       cities.map((city,index) => ({
@@ -90,6 +57,13 @@ export default function Search() {
       })),
     [],
   );
+  if(city===null){
+    showCurrentLocation();
+  }
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLoaded(true)
+    },500)},[city]) 
   const limitOptionsFilter: Filter = useCallback((items, value) => items.slice(0, 10), []);
   const filters = [startsWithValueFilter,limitOptionsFilter] ;
   if (loaded) {
@@ -117,12 +91,11 @@ export default function Search() {
         </div>
           
       </div>
-      <CurrentWeather weather={weatherData} units={units}/>
+      <CurrentWeather city={city} units={units}/>
+      <Forecast city={city} units={units}/>
     </div>
   );
 }else{
-  return <div style={{width:"100%", height:"100vh"}}>
-    <GridLoader color={"#a8d3f7"} loading={true} cssOverride={override} size={30} />
-    </div>
+  return null;
 }
 }
