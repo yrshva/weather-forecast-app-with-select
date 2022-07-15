@@ -1,5 +1,6 @@
 import React, {useState, useEffect, CSSProperties} from 'react';
 import axios from "axios";
+import LocalTime from './LocalTime';
 import BeatLoader from "react-spinners/BeatLoader";
 
 import WeatherIcon from './WeatherIcon';
@@ -12,50 +13,24 @@ export default function CurrentWeather(props) {
     margin: "auto",
     textAlign: "center"
   };
-    let months = ["Jan","Feb","Mar","Apr", "May","Jun","Jul","Aug", "Sep","Oct","Nov","Dec"];
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    
     let [weatherData, setWeatherData] = useState(null);
     let [loaded, setLoaded]=useState(false);
-    let time = new Date().toLocaleString();
-    let [localTime,setLocalTime] = useState(time);
-    useEffect(() => {
-      setInterval(() => {
-      setLocalTime(time);
-      }, 1000);
-    });
+    
     function showWeatherData(response) {
       setWeatherData(response.data);
-    }
-    function getWeatherData(){
-      const apiKey = "c558530bb05c403b5dd2f204254ec041";
-      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${props.city[0]}&lon=${props.city[1]}&appid=${apiKey}&units=metric`;
-      axios.get(apiUrl).then(showWeatherData);
-      axios.get(apiUrl).catch((data,status)=>{
-        alert("Please enter correct city");
-      })
-      console.log('pls');
-    }
-    function currentTime(){
-      let now = new Date();
-      let dt = new Date((new Date().getTime())+(weatherData.timezone+(now.getTimezoneOffset()*60))*1000)
-      let day = days[dt.getDay()];
-      let month = months[dt.getMonth()];
-      let minutes=dt.getMinutes();
-      let houres = dt.getHours();
-      if (minutes<10){
-        minutes = `0${minutes}`;
-      }
-      if(houres<10){
-        houres = `0${houres}`;
-      }
-      return (`${day}, ${dt.getDate()} ${month} ${houres}:${minutes}`);  
     }
     const unitsMapping = {
       "imperial": "°F",
       "metric": "°C"
     }
     useEffect(()=>{
-          getWeatherData();
+      const apiKey = "c558530bb05c403b5dd2f204254ec041";
+      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${props.city[0]}&lon=${props.city[1]}&appid=${apiKey}&units=metric`;
+      axios.get(apiUrl).then(showWeatherData);
+      axios.get(apiUrl).catch((data,status)=>{
+        alert("Please enter correct city");
+      });
       },[props.city])
     useEffect(()=>{
       setTimeout(()=>{
@@ -78,7 +53,7 @@ export default function CurrentWeather(props) {
               <div className="weatherPositioning">
                 <div className="leftBox">
                   <h2>{weatherData.name}</h2>
-                  <p>Local time:<br/>{currentTime()}</p>
+                  <LocalTime timezone={weatherData.timezone}/>
                 </div>
                 <div className="centralBox">
                   <div><WeatherIcon icon={weatherData.weather[0].icon} color={"#a8d3f7"} size={50}/></div>
