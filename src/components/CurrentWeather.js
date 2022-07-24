@@ -1,32 +1,29 @@
-import React, {useState, useEffect, CSSProperties} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import LocalTime from './LocalTime';
 import BeatLoader from "react-spinners/BeatLoader";
-
 import WeatherIcon from './WeatherIcon';
-import "./CurrentWeather.css";
+import "../styles/CurrentWeather.css";
 
-
-export default function CurrentWeather(props) {
-  const override: CSSProperties = {
-    display: "block",
-    margin: "auto",
-    textAlign: "center"
-  };
-    
-    let [weatherData, setWeatherData] = useState(null);
-    let [loaded, setLoaded]=useState(false);
+const override = {
+  display: "block",
+  margin: "auto",
+  textAlign: "center"
+};
+const unitsMapping = {
+  "imperial": "°F",
+  "metric": "°C"
+}
+export default function  CurrentWeather (props) {
+    const [weatherData, setWeatherData] = useState(null);
+    const [loaded, setLoaded]=useState(false);
     
     function showWeatherData(response) {
       setWeatherData(response.data);
     }
-    const unitsMapping = {
-      "imperial": "°F",
-      "metric": "°C"
-    }
+    
     useEffect(()=>{
-      const apiKey = "c558530bb05c403b5dd2f204254ec041";
-      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${props.city[0]}&lon=${props.city[1]}&appid=${apiKey}&units=metric`;
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${props.city[0]}&lon=${props.city[1]}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`;
       axios.get(apiUrl).then(showWeatherData);
       axios.get(apiUrl).catch((data,status)=>{
         alert("Please enter correct city");
@@ -38,7 +35,6 @@ export default function CurrentWeather(props) {
           setLoaded(true);
         }
     },500)},[weatherData])
-    
     if(loaded) {
       let temp = Math.round(weatherData.main.temp);
       let temp_min = Math.round(weatherData.main.temp_min);

@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import ForecastDay from "./ForecastDay"
+import "../styles/Forecast.css";
 
-import "./Forecast.css";
-export default function Forecast(props) {
-  let [forecastData,setForecastData]=useState(null);
-  let [loaded, setLoaded]=useState(false);
+export default function Forecast (props) {
+  const [forecastData,setForecastData]=useState(null);
+  const [loaded, setLoaded]=useState(false);
   function showForecast(response){
     setForecastData(response.data.daily);
   }
   useEffect(()=>{
-    let apiKey = "c558530bb05c403b5dd2f204254ec041"
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.city[0]}&lon=${props.city[1]}&exclude=current,hourly,minutely,alerts&appid=${apiKey}&units=metric`
+    const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.city[0]}&lon=${props.city[1]}&exclude=current,hourly,minutely,alerts&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
     axios.get(apiUrl).then(showForecast);
     axios.get(apiUrl).catch((data, status) => {
       console.log("Something went wrong");
@@ -24,7 +23,7 @@ export default function Forecast(props) {
     }
   },500)},[forecastData])
   if(loaded){
-    return <div className="container">
+    return <div className="container forecast-wrap">
           <div className="row d-flex justify-content-center">
             {forecastData.map(function (dailyForecast,index){
               if(index>0){

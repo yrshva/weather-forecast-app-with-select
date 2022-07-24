@@ -9,6 +9,8 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
     "cities.json": "^1.1.10",
+    "env-cmd": "^10.1.0",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-animated-weather": "^4.0.1",
     "react-datalist-input": "^3.0.6",

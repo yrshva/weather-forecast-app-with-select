@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
-import Search from "./Search";
-import Footer from "./Footer";
+import './styles/App.css';
+import Search from "./components/Search";
+import Footer from "./components/Footer";
 
 
 function App() {

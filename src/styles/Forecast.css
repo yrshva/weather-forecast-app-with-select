@@ -32,3 +32,6 @@ h2 {
 .forecast p {
   font-size: 10pt;
 }
+.forecast-wrap{
+  margin-bottom: 40px;
+}
