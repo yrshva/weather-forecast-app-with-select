@@ -8,6 +8,7 @@
   padding: 15px 30px 15px 15px;
   background-color: #bbdffb;
   border-radius: 50% 20% / 10% 40%;
+  transition: .3s;
 }
 
 .forecast h6 {
