@@ -5,8 +5,7 @@ Weather forecast app allows a user to see real-time weather in any city and a fo
 <h3>Technologies</h3>
 <ul>
 <li>React</li>
-<li>TypeScript</li>
-<li>Redux </li>
+ <li> REST API</li>
 </ul>
 
 <h3>To start the project</h3>
